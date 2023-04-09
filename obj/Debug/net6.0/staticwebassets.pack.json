@@ -9,6 +9,10 @@
       "PackagePath": "staticwebassets\\favicon.ico"
     },
     {
+      "Id": "C:\\Users\\Gaura\\Documents\\MAPD\\Web\\c-sharp-academy-mvc-01-todo-vsc-master\\Todo\\TodoApp\\wwwroot\\img\\background.jpg",
+      "PackagePath": "staticwebassets\\img\\background.jpg"
+    },
+    {
       "Id": "C:\\Users\\Gaura\\Documents\\MAPD\\Web\\c-sharp-academy-mvc-01-todo-vsc-master\\Todo\\TodoApp\\wwwroot\\js\\site.js",
       "PackagePath": "staticwebassets\\js\\site.js"
     },

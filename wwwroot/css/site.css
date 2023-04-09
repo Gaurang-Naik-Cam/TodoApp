@@ -31,7 +31,8 @@ body {
         height: 100%;
         z-index: -1;
         background-image: url("https://preview.pixlr.com/images/800wm/1176/2/1176106312.jpg");
-        opacity: .1;
+        opacity:0.08
+      
     }
 
 .buttons-column {
@@ -40,4 +41,16 @@ body {
 
 .todos-column {
     vertical-align: middle;
+}
+
+.form-check-input:checked {
+    background-color: green !important;
+    border: 0;
+}
+
+.form-check-input:focus, .label::after, label.form-check-label:focus, .form-check-input::after, .form-check-input:not(:disabled):not(.disabled):active:focus {
+    color: black;
+    outline: 0;
+    border: 0;
+    box-shadow: 0 0 0 0.1rem green !important;
 }

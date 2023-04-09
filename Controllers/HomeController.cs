@@ -125,8 +125,8 @@ namespace Todo.Controllers
             return todo;
         }
 
-        // public RedirectResult Insert(TodoItem todo)
-        public JsonResult Insert(TodoItem todo)
+        public ActionResult Insert(TodoItem todo)
+       // public JsonResult Insert(TodoItem todo)
         {
             _context.TodoItems.Add(todo);
             _context.SaveChanges();
@@ -147,7 +147,8 @@ namespace Todo.Controllers
             //        }
             //    }
             //}
-            return Json(new { });
+            //  return Json(new { });
+            return RedirectToAction("Index","Home");
         }
 
         [HttpPost]
@@ -174,7 +175,7 @@ namespace Todo.Controllers
             return Json(new {});
         }
 
-        public JsonResult Update(TodoItem todo)
+        public ActionResult Update(TodoItem todo)
         {
             _context.TodoItems.Update(todo);
             _context.SaveChanges();
@@ -198,7 +199,7 @@ namespace Todo.Controllers
             //}
 
             //  return Redirect("https://localhost:5001/");
-            return Json(new { });
+            return RedirectToAction("Index", "Home");
         }
 
         //public RedirectResult UpdateEF(TodoItem todo)

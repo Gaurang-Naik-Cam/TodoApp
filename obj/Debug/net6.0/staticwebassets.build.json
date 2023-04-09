@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "Df0vv85PSzjdoSaezJER96Jzxqkm4DNcc8ZeLWJXZPs=",
+  "Hash": "Kvj74SEl0CejxjPssd56tdUmy/USHx9OjBbJCR1P/Yc=",
   "Source": "Todo",
   "BasePath": "_content/Todo",
   "Mode": "Default",
@@ -49,6 +49,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\favicon.ico"
+    },
+    {
+      "Identity": "C:\\Users\\Gaura\\Documents\\MAPD\\Web\\c-sharp-academy-mvc-01-todo-vsc-master\\Todo\\TodoApp\\wwwroot\\img\\background.jpg",
+      "SourceId": "Todo",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\Gaura\\Documents\\MAPD\\Web\\c-sharp-academy-mvc-01-todo-vsc-master\\Todo\\TodoApp\\wwwroot\\",
+      "BasePath": "_content/Todo",
+      "RelativePath": "img/background.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\img\\background.jpg"
     },
     {
       "Identity": "C:\\Users\\Gaura\\Documents\\MAPD\\Web\\c-sharp-academy-mvc-01-todo-vsc-master\\Todo\\TodoApp\\wwwroot\\js\\site.js",

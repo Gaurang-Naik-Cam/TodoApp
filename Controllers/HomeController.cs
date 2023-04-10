@@ -26,63 +26,20 @@ namespace Todo.Controllers
 
         public IActionResult Index()
         {
-              var todoListViewModel = GetAllTodosEF();
+            _logger.LogInformation("Fetching data from database");
+              var todoListViewModel = GetAllTodos();
              return View(todoListViewModel);
-           // return View(await _context.TodoItems.ToListAsync());
         }
 
         [HttpGet]
         public JsonResult PopulateForm(int id)
         {
+            _logger.LogInformation("Getting todo list by Id");
             var todo = GetById(id);
             return Json(todo);
         }
 
-
         internal TodoViewModel GetAllTodos()
-        {
-            List<TodoItem> todoList = new();
-
-            using (SqliteConnection con =
-                   new SqliteConnection("Data Source=db.sqlite"))
-            {
-                using (var tableCmd = con.CreateCommand())
-                {
-                    con.Open();
-                    tableCmd.CommandText = "SELECT * FROM todo";
-
-                    using (var reader = tableCmd.ExecuteReader())
-                    {
-                        if (reader.HasRows)
-                        {
-                            while (reader.Read())
-                            {
-                                todoList.Add(
-                                    new TodoItem
-                                    {
-                                        Id = reader.GetInt32(0),
-                                        Name = reader.GetString(1)
-                                    });
-                            }
-                        }
-                        else
-                        {
-                            return new TodoViewModel
-                            {
-                                TodoList = todoList
-                            };
-                        }
-                    };
-                }
-            }
-
-            return new TodoViewModel
-            {
-                TodoList = todoList
-            };
-        }
-
-        internal TodoViewModel GetAllTodosEF()
         {
             List<TodoItem> todoList = _context.TodoItems.ToList();
 
@@ -96,58 +53,17 @@ namespace Todo.Controllers
         internal TodoItem GetById(int id)
         {
             TodoItem todo = _context.TodoItems.ToList().Where(i => i.Id==id).FirstOrDefault();
-
-
-            //using (var connection =
-            //       new SqliteConnection("Data Source=db.sqlite"))
-            //{
-            //    using (var tableCmd = connection.CreateCommand())
-            //    {
-            //        connection.Open();
-            //        tableCmd.CommandText = $"SELECT * FROM todo Where Id = '{id}'";
-
-            //        using (var reader = tableCmd.ExecuteReader())
-            //        {
-            //            if (reader.HasRows)
-            //            {
-            //                reader.Read();
-            //                todo.Id = reader.GetInt32(0);
-            //                todo.Name = reader.GetString(1);
-            //            }
-            //            else
-            //            {
-            //                return todo;
-            //            }
-            //        };
-            //    }
-            //}
-
             return todo;
         }
 
         public ActionResult Insert(TodoItem todo)
-       // public JsonResult Insert(TodoItem todo)
         {
-            _context.TodoItems.Add(todo);
-            _context.SaveChanges();
-            //using (SqliteConnection con =
-            //       new SqliteConnection("Data Source=db.sqlite"))
-            //{
-            //    using (var tableCmd = con.CreateCommand())
-            //    {
-            //        con.Open();
-            //        tableCmd.CommandText = $"INSERT INTO todo (name) VALUES ('{todo.Name}')";
-            //        try
-            //        {
-            //            tableCmd.ExecuteNonQuery();
-            //        }
-            //        catch (Exception ex)
-            //        {
-            //            Console.WriteLine(ex.Message);
-            //        }
-            //    }
-            //}
-            //  return Json(new { });
+            if (!string.IsNullOrEmpty(todo.Name))
+            {
+                _context.TodoItems.Add(todo);
+                _context.SaveChanges();
+                _logger.LogInformation(string.Format("New Todo Item - {0} is added", todo.Name));
+            }
             return RedirectToAction("Index","Home");
         }
 
@@ -159,52 +75,19 @@ namespace Todo.Controllers
             {
                 _context.TodoItems.Remove(item);
                 _context.SaveChanges();
+                _logger.LogInformation(string.Format("{0} Todo Item is removed.",item.Name));
             }
-
-            //using (SqliteConnection con =
-            //       new SqliteConnection("Data Source=db.sqlite"))
-            //{
-            //    using (var tableCmd = con.CreateCommand())
-            //    {
-            //        con.Open();
-            //        tableCmd.CommandText = $"DELETE from todo WHERE Id = '{id}'";
-            //        tableCmd.ExecuteNonQuery();
-            //    }
-            //}
-
             return Json(new {});
         }
 
+        [HttpPost]
         public ActionResult Update(TodoItem todo)
-        {
+        {   
             _context.TodoItems.Update(todo);
             _context.SaveChanges();
-
-            //using (SqliteConnection con =
-            //       new SqliteConnection("Data Source=db.sqlite"))
-            //{
-            //    using (var tableCmd = con.CreateCommand())
-            //    {
-            //        con.Open();
-            //        tableCmd.CommandText = $"UPDATE todo SET name = '{todo.Name}' WHERE Id = '{todo.Id}'";
-            //        try
-            //        {
-            //            tableCmd.ExecuteNonQuery();
-            //        }
-            //        catch (Exception ex)
-            //        {
-            //            Console.WriteLine(ex.Message);
-            //        }
-            //    }
-            //}
-
-            //  return Redirect("https://localhost:5001/");
+            _logger.LogInformation(string.Format("{0} Todo Item is updated.", todo.Name));
             return RedirectToAction("Index", "Home");
         }
 
-        //public RedirectResult UpdateEF(TodoItem todo)
-        //{
-
-        //}
     }
 }

@@ -25,15 +25,14 @@ function populateForm(i) {
             console.log(response);
             $("#Todo_Name").val(response.name);
             $("#Todo_Id").val(response.id);
-            if (response.isComplete) {
-                console.log("true condition")
-                $("#Todo_IsComplete").attr("checked", "checked");
-            }
-            else
-                $("#Todo_IsComplete").removeAttr("checked");
+            $("#Todo_IsComplete").prop("checked", response.isComplete)
             $("#Todo_IsComplete").val(response.isComplete);
             $("#form-button").val("Update Todo");
             $("#form-action").attr("action", "/Home/Update");
         }
     });
 }
+
+
+
+

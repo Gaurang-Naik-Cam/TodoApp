@@ -1,5 +1,4 @@
 @model TodoViewModel
-
 <form asp-action="Insert" id="form-action" method="post" class="form-horizontal" role="form">
     <div asp-validation-summary="All" class="text-danger"></div>
 
@@ -9,7 +8,7 @@
             <input asp-for="Todo.Id" type="hidden" class="form-control" />
             <input asp-for="Todo.Name" class="form-control" /><br />
             <label asp-for="Todo.IsComplete" class="form-label">Status</label>
-            <input asp-for="Todo.IsComplete" type="checkbox" />
+            <input asp-for="Todo.IsComplete" class="form-check" />
             <span asp-validation-for="Todo.Name" class="text-danger"></span>    
         </div>
     </div>

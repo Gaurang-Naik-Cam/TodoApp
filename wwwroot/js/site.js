@@ -25,10 +25,23 @@ function populateForm(i) {
             console.log(response);
             $("#Todo_Name").val(response.name);
             $("#Todo_Id").val(response.id);
-            $("#Todo_IsComplete").prop("checked", response.isComplete)
-            $("#Todo_IsComplete").val(response.isComplete);
+           // $("#Todo_IsComplete").prop("checked", response.isComplete)
+           // $("#Todo_IsComplete").val(response.isComplete);
             $("#form-button").val("Update Todo");
             $("#form-action").attr("action", "/Home/Update");
+        }
+    });
+}
+
+function toggleStatus(i) {
+    $.ajax({
+        url: 'Home/ToggleStatus',
+        type: 'POST',
+        data: {
+            id: i
+        },
+        success: function () {
+            window.location.reload();
         }
     });
 }

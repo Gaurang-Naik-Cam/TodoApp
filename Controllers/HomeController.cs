@@ -81,9 +81,25 @@ namespace Todo.Controllers
         }
 
         [HttpPost]
+        public JsonResult ToggleStatus(int id)
+        {
+            var item = _context.TodoItems.ToList().Where(i => i.Id == id).FirstOrDefault();
+            if (item != null)
+            {
+                item.IsComplete = !item.IsComplete;
+                _context.TodoItems.Update(item);
+                _context.SaveChanges();
+                _logger.LogInformation(string.Format("{0} Todo Item staus is changed to {1}", item.Name, item.IsComplete.ToString()));
+            }
+            return Json(new { });
+        }
+
+        [HttpPost]
         public ActionResult Update(TodoItem todo)
-        {   
-            _context.TodoItems.Update(todo);
+        {
+            var item = _context.TodoItems.ToList().Where(i => i.Id == todo.Id).FirstOrDefault();
+            item.Name = todo.Name;
+            _context.TodoItems.Update(item);
             _context.SaveChanges();
             _logger.LogInformation(string.Format("{0} Todo Item is updated.", todo.Name));
             return RedirectToAction("Index", "Home");

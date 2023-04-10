@@ -1,7 +1,6 @@
 ﻿@model TodoViewModel
-
 <div class="row justify-content-center">
-    <div class="col-xl-6 col-lg-8 col-md-8 col-sm-10">
+    <div class="col-xl-8 col-lg-8 col-md-8 col-sm-20">
         <table class="table">
             <thead>
                 <tr class="table-primary">
@@ -27,8 +26,18 @@
                             }
                         </td> 
                         <td class="buttons-column">
+                            @if (t.IsComplete)
+                            {
+                                <input type="submit" class="btn btn-primary" value="Undone" onClick="toggleStatus(@t.Id)" />
+                            }
+                            else
+                            {
+                                <input type="submit" class="btn btn-primary" value="Done" onClick="toggleStatus(@t.Id)" />
+                            }
+
+                            <input type="submit" class="btn btn-secondary" value="Update Task Name" onClick="populateForm(@t.Id)" />
                             <input type="submit" class="btn btn-danger" value="Delete" onClick="deleteTodo(@t.Id)" />
-                            <input type="submit" class="btn btn-primary" value="Update" onClick="populateForm(@t.Id)" />
+                           
                         </td>
 
                     </tr>
